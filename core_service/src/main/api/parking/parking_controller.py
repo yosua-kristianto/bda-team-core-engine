@@ -28,7 +28,7 @@ class ParkingController:
         "parking_in_time": "2023-10-19 14:00:00",
         "price_issued_at": "2023-10-19 15:00:00", // Get from current date
         "price": 10000
-    }
+    } 
     ```
 
     """
@@ -40,6 +40,7 @@ class ParkingController:
         response.parking_in_time = parking_data["parking_in_time"];
         response.price_issued_at = parking_data["price_issued_at"];
         response.price = parking_data["price"];
+
         return BaseResponse.ok(message = "Successfully issuing parking price", data = response);
 
     """

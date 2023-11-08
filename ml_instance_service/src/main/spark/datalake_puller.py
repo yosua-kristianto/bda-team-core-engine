@@ -1,6 +1,6 @@
 
 
-from "ml-instance-service.src.main.core.spark_integrator" import SparkIntegrator
+from ml_instance_service.src.main.spark.datalake_puller import SparkIntegrator
 
 
 SPARK_CONTEXT_NAME = "DATALAKE_PULLER_CONTEXT";
