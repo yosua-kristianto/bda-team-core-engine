@@ -2,6 +2,7 @@ from core_service.src.main.model.dto.base_response import BaseResponse;
 from fastapi import APIRouter;
 from core_service.src.main.model.dto.request.GetParkingByPlate import GetParkingByPlateBodyRequest;
 from core_service.src.main.model.dto.response.GetParkingByPlate import GetParkingByPlateBodyResponse;
+from core_service.src.main.api.parking.parking_controller_handler import handle_issue_parking_price;
 
 class ParkingController:
 
@@ -25,21 +26,21 @@ class ParkingController:
     ```
     {
         "parking_in_time": "2023-10-19 14:00:00",
-        "parking_out_time": "2023-10-19 15:00:00", // Get from current date
+        "price_issued_at": "2023-10-19 15:00:00", // Get from current date
         "price": 10000
     }
     ```
 
     """
     @router.post('/')
-    def test(request: GetParkingByPlateBodyRequest):
-        # Missing business logic
+    def issue_parking_price(request: GetParkingByPlateBodyRequest):
+        parking_data = handle_issue_parking_price(request.plate);
 
         response = GetParkingByPlateBodyResponse();
-        response.parking_in_time = "2023-11-23 00:00:05";
-        response.parking_out_time = "2023-11-23 00:01:13";
-        response.price = 10000;
-        return BaseResponse.ok(message = "Hello World", data=response);
+        response.parking_in_time = parking_data["parking_in_time"];
+        response.price_issued_at = parking_data["price_issued_at"];
+        response.price = parking_data["price"];
+        return BaseResponse.ok(message = "Successfully issuing parking price", data = response);
 
     """
     2. Mock parking payment (POST)
